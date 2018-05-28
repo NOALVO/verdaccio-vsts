@@ -1,0 +1,8 @@
+storage: ./storage
+auth:
+  vsts:
+    account: noalvo
+packages:
+  '**':
+    access: all
+    publish: all

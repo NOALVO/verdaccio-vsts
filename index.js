@@ -18,9 +18,8 @@ function Auth(config, stuff) {
 
 Auth.prototype.authenticate = function (user, password, callback) {
 
-  let autenticacao = 'Basic OmNkN29oaWxwcTZueXpxZTd6Z3prd3NiNndpZXR4bWtlYTd1N3dzNnBsZWZmZjZpcWMydnE=';
-  //"Basic "+ Buffer.from(":" + password).toString('base64');
-  
+  // let autenticacao = 'Basic OmNkN29oaWxwcTZueXpxZTd6Z3prd3NiNndpZXR4bWtlYTd1N3dzNnBsZWZmZjZpcWMydnE=';
+  let autenticacao = 'Basic '+ Buffer.from(':' + password).toString('base64');
 
   const options = { 
     method: 'GET',
@@ -30,11 +29,14 @@ Auth.prototype.authenticate = function (user, password, callback) {
   };
   
   request(options, function (error, response, body) {
+    
     if (error) return callback(error);
-   
-   var id = body.projectRefs.id.map((ids) => {
-     return callback(null,ids)
-      });
+
+    var objJson = JSON.parse(body);
+    var ids = objJson.projectRefs.map(function(array){
+      return array.id;
+    });
+    return callback(null, ids);
    });
 };
 module.exports = Auth;

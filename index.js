@@ -1,43 +1,37 @@
-const request = require('request')
-const verdaccio = require('verdaccio')
+const request = require('request');
+class Login {
+  constructor(config, stuff) {
+    this.config = config;
+    this.logger = stuff.logger;
+  }
 
-function Auth(config, stuff) {
-  var self = Object.create(Auth.prototype);
-  self._users = {};
-  
-  // config for this module
-  self._config = config;
-  
-  // verdaccio logger
-  self._logger = stuff.logger;
-  
-  // pass verdaccio logger to ldapauth
-  //self._config.client_options.log = stuff.logger;
-  
-  return self;
+  authenticate(user, password, callback) {
+    const self = this;
+    const autenticacao = 'Basic '+ Buffer.from(':' + password).toString('base64');
+    
+    const options = { 
+      method: 'GET',
+      url: `https://${self.config.account}.vsaex.visualstudio.com/_apis/userentitlementsummary`,
+      qs: { select: 'projects' },
+      headers: {  Authorization: autenticacao, Accept: 'application/json' }
+    };
+    
+    return request(options, function (error, response, body) {    
+      if (error || !body) return callback(error || 'body empty');
+      
+      try {
+        const objJson = JSON.parse(body);
+        const ids = objJson.projectRefs.map((array)=>{
+          return array.id;
+        });
+        return callback(null,ids)
+      } catch (erro) {
+        return callback(erro);
+      }
+    });
+  }
 }
 
-Auth.prototype.authenticate = (user, password, callback) => {
-  
-  // let autenticacao = 'Basic OmNkN29oaWxwcTZueXpxZTd6Z3prd3NiNndpZXR4bWtlYTd1N3dzNnBsZWZmZjZpcWMydnE=';
-  let autenticacao = 'Basic '+ Buffer.from(':' + password).toString('base64');
-  
-  const options = { 
-    method: 'GET',
-    url: 'https://noalvo.vsaex.visualstudio.com/_apis/userentitlementsummary',
-    qs: { select: 'projects' },
-    headers: {  Authorization: autenticacao }
-  };
-  
-  request(options, function (error, response, body) {
-    
-    if (error) return callback(error);
-    
-    var objJson = JSON.parse(body);
-    var ids = objJson.projectRefs.map((array)=>{
-      return array.id;
-    });
-    return callback(null,ids)
-  });
-};
-module.exports = Auth;
+
+module.exports = (...args) => new Login(...args);
+

@@ -1,8 +1,0 @@
-storage: ./storage
-auth:
-  vsts:
-    account: noalvo
-packages:
-  '**':
-    access: all
-    publish: 2cf19660-55cc-4580-8bc6-38cbc88b1c19

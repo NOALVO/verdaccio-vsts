@@ -1,25 +1,36 @@
 {
   "name": "verdaccio-vsts",
   "version": "1.0.0",
-  "description": "",
+  "description": "🔑 Auth based on Visual Studio Team Services for verdaccio http://www.verdaccio.org",
+  "keywords": [
+    "verdaccio",
+    "plugin",
+    "vsts",
+    "team services",
+    "verdaccio-plugin"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NOALVO/npm.git"
+    "url": "git+https://github.com/NOALVO/verdaccio-vsts.git"
   },
-  "author": "",
-  "private": true,
-  "license": "ISC",
+  "author": "NOALVO",
+  "contributors": [
+    { "name": "Gustavo Gondim", "email": "gustavo@midianoalvo.com.br", "url": "https://github.com/ggondim"},
+    { "name": "Felipe Negri", "email": "felipe.negri@midianoalvo.com.br", "url": "https://github.com/felipe-negri"}
+  ],
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/NOALVO/npm/issues"
+    "url": "https://github.com/NOALVO/verdaccio-vsts/issues"
   },
-  "homepage": "https://github.com/NOALVO/npm#readme",
+  "homepage": "https://github.com/NOALVO/verdaccio-vsts#readme",
+  "engines": {
+    "node": ">=8"
+  },
   "dependencies": {
-    "request": "^2.87.0",
-    "verdaccio": "^2.7.4",
-    "verdaccio-vsts": "https://github.com/NOALVO/verdaccio-vsts"
+    "request": "^2.87.0"
   }
 }

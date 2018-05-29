@@ -1,6 +1,0 @@
-var Auth = require('./index');
-
-
-var xpto = new Auth('./Config.js','./Logger.js');
-xpto.authenticate('x','XXXYYYYYZZZZ',null);
-

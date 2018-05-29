@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/NOALVO/npm#readme",
   "dependencies": {
-    "request": "^2.87.0"
+    "request": "^2.87.0",
+    "verdaccio": "^2.7.4"
   }
 }

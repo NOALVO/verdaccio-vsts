@@ -19,6 +19,7 @@
   "homepage": "https://github.com/NOALVO/npm#readme",
   "dependencies": {
     "request": "^2.87.0",
-    "verdaccio": "^2.7.4"
+    "verdaccio": "^2.7.4",
+    "verdaccio-vsts": "git+https://github.com/NOALVO/verdaccio-vsts"
   }
 }
